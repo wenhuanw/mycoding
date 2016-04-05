@@ -1,0 +1,80 @@
+/**
+ * 
+ */
+package S16;
+
+/**
+ * @author Wenhuan
+ *
+ */
+import java.lang.String;
+public class compressedstring {
+	char[] compress(String s){
+		int i=0;
+		int j=0;
+		int k=0;
+		char[] sc=s.toCharArray();
+		char[] result=new char[s.length()];
+		char[] resultf = null;
+		int count=0;
+		int countdifference=0;
+		boolean outoflength=false;
+		while(true){
+			if(sc[i]==sc[j]){
+				j++;
+				count++;
+				if (j==s.length()){
+					if (k>=s.length()){
+						resultf=sc;
+						outoflength=true;
+						break;
+					}
+					result[k]=sc[i];
+					String counts=String.valueOf(count);
+					result[k+1]=counts.toCharArray()[0];
+					countdifference++;
+					break;
+					
+				}
+				
+				
+			}
+			else{
+				if (k>=s.length()){
+					resultf=sc;
+					outoflength=true;
+					break;
+				}
+				result[k]=sc[i];
+				String counts=String.valueOf(count);
+				result[k+1]=counts.toCharArray()[0];
+				System.out.println(result[k]);
+				System.out.println(result[k+1]);
+				i=j;
+				countdifference++;
+				k=k+2;
+				count=1;
+				j++;
+			}
+		}
+		if(!outoflength){
+			resultf=new char[countdifference*2];
+			for (int r=0;r<resultf.length;r++){
+				resultf[r]=result[r];	
+			}
+		}
+		
+		return resultf;
+		
+		
+		
+	}
+	
+	public static void main(String[] args){
+		compressedstring a= new compressedstring();
+		System.out.println(a.compress("abcd"));
+		char b='\0';
+		System.out.println(b);
+	}
+
+}
